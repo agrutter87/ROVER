@@ -13,6 +13,8 @@ boolean motorDirection[2] = {LOW, LOW};
 int panServoAngle = 0;
 int tiltServoAngle = 90;
 
+int encoderValue[2] = {0, 0};
+
 void setup()
 {
   pinMode(5, OUTPUT);
@@ -31,4 +33,7 @@ void loop()
   digitalWrite(motorDirectionPin[1], motorDirection[1]);
   panServo.write(panServoAngle);
   tiltServo.write(tiltServoAngle);
+  
+  encoderValue[0] = analogRead(A0);
+  encoderValue[1] = analogRead(A1);
 }
