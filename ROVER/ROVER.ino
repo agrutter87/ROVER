@@ -7,6 +7,7 @@ int motorSpeedPin[2] = {6, 5};
 int motorDirectionPin[2] = {8, 7};
 int panServoPin = 9;
 int tiltServoPin = 10;
+int rangefinderPin = 11;
 int irOutputPin = 12;
 
 int motorSpeed[2] = {0, 0}
@@ -16,6 +17,23 @@ int tiltServoAngle = 90;
 
 int encoderValue[2] = {0, 0};
 int irValue[4] = {0, 0, 0, 0};
+
+void sendPing(int pin)
+{
+  pinMode(pin, OUTPUT);
+  digitalWrite(pin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pin, HIGH);
+  delayMicroseconds(15);
+  digitalWrite(pin, LOW);
+  delayMicroseconds(20);
+}
+
+long receivePing(int pin)
+{
+  pinMode(pin, INPUT);
+  return pulseIn(pin, HIGH);
+}
 
 void setup()
 {
