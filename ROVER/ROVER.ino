@@ -10,13 +10,15 @@ int tiltServoPin = 10;
 int rangefinderPin = 11;
 int irOutputPin = 12;
 
-int motorSpeed[2] = {0, 0}
+int motorSpeed[2] = {0, 0};
 boolean motorDirection[2] = {LOW, LOW};
-int panServoAngle = 0;
-int tiltServoAngle = 90;
+int panServoAngle = 90;
+int tiltServoAngle = 180;
 
 int encoderValue[2] = {0, 0};
 int irValue[4] = {0, 0, 0, 0};
+int accelerometer_x = 0;
+int accelerometer_y = 0;
 
 void sendPing(int pin)
 {
@@ -42,8 +44,9 @@ void setup()
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
   pinMode(12, OUTPUT);
-  panServo.attach(tiltServoPin);
-  tiltServo.attach(panServoPin);
+  panServo.attach(panServoPin);
+  tiltServo.attach(tiltServoPin);
+  Serial.begin(9600);
 }
 
 void loop()
@@ -58,8 +61,10 @@ void loop()
   
   encoderValue[0] = analogRead(A0);
   encoderValue[1] = analogRead(A1);
-  irData[0] = analogRead(A2);
-  irData[1] = analogRead(A3);
-  irData[2] = analogRead(A4);
-  irData[3] = analogRead(A5);
+  irValue[0] = analogRead(A2);
+  irValue[1] = analogRead(A3);
+  irValue[2] = analogRead(A4);
+  irValue[3] = analogRead(A5);
+  accelerometer_x = analogRead(A6);
+  accelerometer_y = analogRead(A7);
 }
